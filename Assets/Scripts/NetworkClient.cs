@@ -6,15 +6,20 @@ using System.Text;
 
 public class NetworkClient : MonoBehaviour
 {
+    private const int loginScreenID = 2;
+    private const int gameRoomBrowserScreenID = 4;
+    public GameObject UI;
+    private UIStateMachine stateChanger;
     NetworkDriver networkDriver;
     NetworkConnection networkConnection;
     NetworkPipeline reliableAndInOrderPipeline;
     NetworkPipeline nonReliableNotInOrderedPipeline;
     const ushort NetworkPort = 9001;
-    const string IPAddress = "192.168.2.20";
+    const string IPAddress = "198.96.87.76";
 
     void Start()
     {
+        stateChanger = UI.gameObject.GetComponent<UIStateMachine>();
         networkDriver = NetworkDriver.Create();
         reliableAndInOrderPipeline = networkDriver.CreatePipeline(typeof(FragmentationPipelineStage), typeof(ReliableSequencedPipelineStage));
         nonReliableNotInOrderedPipeline = networkDriver.CreatePipeline(typeof(FragmentationPipelineStage));
@@ -100,6 +105,13 @@ public class NetworkClient : MonoBehaviour
     private void ProcessReceivedMsg(string msg)
     {
         Debug.Log("Msg received = " + msg);
+
+        string[] serverData = msg.Split(',');
+
+        if (serverData[0] == UserType.LoggedInUser.ToString() && stateChanger.GetCurrentScreen() == loginScreenID)
+        {
+            stateChanger.SetCurrentScreen(gameRoomBrowserScreenID);
+        }
     }
 
     public void SendMessageToServer(string msg)
