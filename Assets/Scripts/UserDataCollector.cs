@@ -19,8 +19,8 @@ public class UserDataCollector : MonoBehaviour
         // Start is called before the first frame update
     void Start()
     {
-        clientObj = GameObject.Find("NetworkedClient");
-        clientNW = GameObject.Find("NetworkedClient").GetComponent<NetworkClient>();
+        clientObj = GameObject.Find("Client");
+        clientNW = GameObject.Find("Client").GetComponent<NetworkClient>();
     }
 
     // Update is called once per frame
@@ -31,6 +31,7 @@ public class UserDataCollector : MonoBehaviour
 
     public void SendUserDataToServer()
     {
+        //clean up
         clientNW.SendMessageToServer( ProcessUserType() + ProcessUsername() + ProcessPassword());
     }
 

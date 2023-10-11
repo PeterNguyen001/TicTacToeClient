@@ -6,5 +6,5 @@ public enum UserType
 {
     NewUser = 2,
     OldUser = 3,
-    LoggedInUser = 4,
+    LoggedInUser = 4
 }
