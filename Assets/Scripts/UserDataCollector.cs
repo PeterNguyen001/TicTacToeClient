@@ -32,7 +32,7 @@ public class UserDataCollector : MonoBehaviour
     public void SendUserDataToServer()
     {
         //clean up
-        clientNW.SendMessageToServer( ProcessUserType() + ProcessUsername() + ProcessPassword());
+        clientNW.SendMessageToServer( ProcessUserType() + ProcessUsername() + ProcessPassword(),TransportPipeline.ReliableAndInOrder);
     }
 
     public string ProcessUserType()
@@ -53,6 +53,6 @@ public class UserDataCollector : MonoBehaviour
     }
     public void SendGameRoomName()
     {
-        clientNW.SendMessageToServer(ProcessUserType() + ProcessGameRoomName());
+        clientNW.SendMessageToServer(ProcessUserType() + ProcessGameRoomName(), TransportPipeline.ReliableAndInOrder);
     }
 }

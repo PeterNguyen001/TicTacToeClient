@@ -243,6 +243,50 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2037204022903937721, guid: d63a284fd1a03864fa7cba720bea12e7, type: 3}
   m_PrefabInstance: {fileID: 44695483}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &172116531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 172116533}
+  - component: {fileID: 172116532}
+  m_Layer: 0
+  m_Name: GameLogic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &172116532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172116531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49bf0e87938e39438cdb2f87800a14c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &172116533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172116531}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 575.5468, y: 261.11267, z: -1.0727484}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &233274771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -510,6 +554,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Room Browser
       objectReference: {fileID: 0}
+    - target: {fileID: 7568582217734029446, guid: 5283ce63fcf8ff94f8d45d75505df950, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 5283ce63fcf8ff94f8d45d75505df950, type: 3}
@@ -760,6 +808,10 @@ PrefabInstance:
     - target: {fileID: 8971775034027655497, guid: b23745f63d062b64b8d709c371b3de53, type: 3}
       propertyPath: m_Name
       value: Login Screen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8971775034027655497, guid: b23745f63d062b64b8d709c371b3de53, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8971775034185988333, guid: b23745f63d062b64b8d709c371b3de53, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
