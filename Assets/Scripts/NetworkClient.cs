@@ -6,6 +6,8 @@ using System.Text;
 
 public class NetworkClient : MonoBehaviour
 {
+    private string userName;
+
     private const int loginScreenID = 2;
     private const int gameRoomBrowserScreenID = 3;
 
@@ -17,7 +19,7 @@ public class NetworkClient : MonoBehaviour
     NetworkPipeline reliableAndInOrderPipeline;
     NetworkPipeline nonReliableNotInOrderedPipeline;
     const ushort NetworkPort = 9001;
-    const string IPAddress = "10.8.81.54";
+    const string IPAddress = "10.8.81.136";
 
     void Start()
     {
@@ -130,5 +132,14 @@ public class NetworkClient : MonoBehaviour
         buffer.Dispose();
     }
 
+    public string GetUserName()
+    {
+        return userName;
+    }
+
+    public void SetUserName(string userName)
+    {
+        this.userName = userName;
+    }
 }
 
