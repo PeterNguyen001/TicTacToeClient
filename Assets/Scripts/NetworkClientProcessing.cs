@@ -4,9 +4,9 @@ using UnityEngine;
 
 static public class NetworkClientProcessing
 {
-
-    private const int loginScreenID = 2;
-    private const int gameRoomBrowserScreenID = 3;
+    static int userType = 0;
+     static int loginScreenID = 2;
+     static int gameRoomBrowserScreenID = 3;
     [SerializeField]
     static GameObject UI;
 
@@ -17,9 +17,8 @@ static public class NetworkClientProcessing
         Debug.Log("Network msg received =  " + msg + ", from pipeline = " + pipeline);
 
         string[] csv = msg.Split(',');
-        int signifier = int.Parse(csv[0]);
 
-        if (signifier == ((int)UserType.LoggedInUser) && stateChanger.GetCurrentScreen() == loginScreenID)
+        if (csv[userType] == ((int)UserType.LoggedInUser).ToString() && stateChanger.GetCurrentScreen() == loginScreenID)
         {
             stateChanger.SetCurrentScreen(gameRoomBrowserScreenID);
         }
