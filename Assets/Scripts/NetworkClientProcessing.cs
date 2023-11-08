@@ -9,7 +9,7 @@ static public class NetworkClientProcessing
     private const int gameRoomBrowserScreenID = 3;
     [SerializeField]
     static GameObject UI;
-    private static UIStateMachine stateChanger;
+
     #region Send and Receive Data Functions
     static public void ReceivedMessageFromServer(string msg, TransportPipeline pipeline)
     {
@@ -70,7 +70,7 @@ static public class NetworkClientProcessing
     #region Setup
     static NetworkClient networkClient;
     static GameLogic gameLogic;
-
+     static UIStateMachine stateChanger;
     static public void SetNetworkedClient(NetworkClient NetworkClient)
     {
         networkClient = NetworkClient;
@@ -82,6 +82,10 @@ static public class NetworkClientProcessing
     static public void SetGameLogic(GameLogic GameLogic)
     {
         gameLogic = GameLogic;
+    }
+    static public void SetStateChanger(UIStateMachine StateChanger)
+    {
+        stateChanger = StateChanger;
     }
 
     #endregion

@@ -24,6 +24,7 @@ public class UIStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        NetworkClientProcessing.SetStateChanger(this);
         welcomeObj = transform.GetChild(welcomeScreenID).gameObject;
         registerGameObj = transform.GetChild(registerScreenID).gameObject;
         loginGameObj = transform.GetChild(loginScreenID).gameObject;
