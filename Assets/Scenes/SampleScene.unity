@@ -403,6 +403,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetCurrentScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 8274600064404858521, guid: 3690f842069ae274c96223687fae4911, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8274600062660051079, guid: 3690f842069ae274c96223687fae4911, type: 3}
     m_AddedGameObjects: []
@@ -721,6 +725,18 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2015908353}
     m_Modifications:
+    - target: {fileID: 8971775033118027829, guid: b23745f63d062b64b8d709c371b3de53, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2015908354}
+    - target: {fileID: 8971775033118027829, guid: b23745f63d062b64b8d709c371b3de53, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetCurrentScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8971775033118027829, guid: b23745f63d062b64b8d709c371b3de53, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8971775034027655496, guid: b23745f63d062b64b8d709c371b3de53, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
