@@ -103,18 +103,6 @@ public class NetworkClient : MonoBehaviour
         return true;
     }
 
-    private void ProcessReceivedMsg(string msg)
-    {
-        Debug.Log("Msg received = " + msg);
-
-        string[] serverData = msg.Split(',');
-        //clean up
-        if (serverData[0] == ((int)UserType.LoggedInUser).ToString() && stateChanger.GetCurrentScreen() == loginScreenID)
-        {
-            stateChanger.SetCurrentScreen(gameRoomBrowserScreenID);
-        }
-    }
-
     public void SendMessageToServer(string msg, TransportPipeline pipeline)
     {
         NetworkPipeline networkPipeline = reliableAndInOrderPipeline;

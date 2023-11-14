@@ -18,9 +18,9 @@ static public class NetworkClientProcessing
 
         string[] csv = msg.Split(',');
 
-        if (csv[userType] == ((int)UserType.LoggedInUser).ToString() && stateChanger.GetCurrentScreen() == loginScreenID)
+        if (csv[userType] == ((int)UserType.LoggedInUser).ToString() && ((int)stateChanger.GetIntCurrentScreen()) == loginScreenID)
         {
-            stateChanger.SetCurrentScreen(gameRoomBrowserScreenID);
+            stateChanger.SetCurrentScreenFromInt(gameRoomBrowserScreenID);
         }
         // if (signifier == ServerToClientSignifiers.asd)
         // {
