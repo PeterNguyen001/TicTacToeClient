@@ -13,7 +13,10 @@ public class GameLogic : MonoBehaviour
     {
         //if (Input.GetKeyDown(KeyCode.A))
         //    NetworkClientProcessing.SendMessageToServer("3,Hello server's world, sincerely your network client", TransportPipeline.ReliableAndInOrder);
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
 }

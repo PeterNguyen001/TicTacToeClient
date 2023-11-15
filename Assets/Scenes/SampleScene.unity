@@ -1136,6 +1136,10 @@ PrefabInstance:
       value: 254
       objectReference: {fileID: 0}
     - target: {fileID: 1402187695193399518, guid: 11aba8df427e84d439249f8522edbf77, type: 3}
+      propertyPath: m_text
+      value: Waiting Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402187695193399518, guid: 11aba8df427e84d439249f8522edbf77, type: 3}
       propertyPath: m_TextStyleHashCode
       value: -1183493901
       objectReference: {fileID: 0}

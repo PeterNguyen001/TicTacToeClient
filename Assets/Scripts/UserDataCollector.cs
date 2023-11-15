@@ -10,7 +10,7 @@ public class UserDataCollector : MonoBehaviour
     private const int Password = 1;
     private const int GameRoom = 0;
 
-
+    private string username;
     
     private GameObject clientObj;
         private NetworkClient clientNW;
@@ -41,7 +41,8 @@ public class UserDataCollector : MonoBehaviour
     }
     public string ProcessUsername()
     {
-        return transform.GetChild(Username).gameObject.GetComponent<TMP_InputField>().text + ",";
+        username = transform.GetChild(Username).gameObject.GetComponent<TMP_InputField>().text + ",";
+        return username ;
     }
     public string ProcessPassword()
     {
@@ -53,6 +54,6 @@ public class UserDataCollector : MonoBehaviour
     }
     public void SendGameRoomName()
     {
-        clientNW.SendMessageToServer(ProcessUserType() + ProcessGameRoomName(), TransportPipeline.ReliableAndInOrder);
+        clientNW.SendMessageToServer(ProcessUserType() + username + ProcessGameRoomName(), TransportPipeline.ReliableAndInOrder);
     }
 }

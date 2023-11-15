@@ -31,7 +31,7 @@ static public class NetworkClientProcessing
         {
             stateChanger.SetCurrentScreenFromInt(gameRoomBrowserScreenID);
         }
-        else if(csv[userType] == ((int)UserType.WaitingUser).ToString() && ((int)stateChanger.GetIntCurrentScreen()) == gameWaitingRoomScreenID)
+        else if(csv[userType] == ((int)UserType.GamerUser).ToString() && ((int)stateChanger.GetIntCurrentScreen()) == gameWaitingRoomScreenID)
         {
             stateChanger.SetCurrentScreenFromInt(gamegRoomScreenID);
         }
