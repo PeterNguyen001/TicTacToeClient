@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,22 +23,15 @@ static public class NetworkClientProcessing
         {
             stateChanger.SetCurrentScreenFromInt(gameRoomBrowserScreenID);
         }
-        // if (signifier == ServerToClientSignifiers.asd)
-        // {
-
-        // }
-        // else if (signifier == ServerToClientSignifiers.asd)
-        // {
-
-        // }
-
-        //gameLogic.DoSomething();
 
     }
 
     static public void SendMessageToServer(string msg, TransportPipeline pipeline)
     {
-        networkClient.SendMessageToServer(msg, pipeline);
+        if(IsValidMessage(msg))
+        { networkClient.SendMessageToServer(msg, pipeline); }
+        else
+        { Debug.Log("Invalid Character!"); }
     }
 
     #endregion
@@ -69,7 +63,7 @@ static public class NetworkClientProcessing
     #region Setup
     static NetworkClient networkClient;
     static GameLogic gameLogic;
-     static UIStateMachine stateChanger;
+    static UIStateMachine stateChanger;
     static public void SetNetworkedClient(NetworkClient NetworkClient)
     {
         networkClient = NetworkClient;
@@ -85,6 +79,23 @@ static public class NetworkClientProcessing
     static public void SetStateChanger(UIStateMachine StateChanger)
     {
         stateChanger = StateChanger;
+    }
+
+    static public bool IsValidMessage(string message)
+    {
+        char[] invalidChars = System.IO.Path.GetInvalidPathChars();
+
+        foreach (char c in message)
+        {
+            if (Array.IndexOf(invalidChars, c) >= 0)
+            {
+                return false;
+            }
+        }
+
+        // Additional checks for other invalid characters can be added here if needed
+
+        return true;
     }
 
     #endregion
