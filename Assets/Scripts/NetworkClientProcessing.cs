@@ -8,6 +8,8 @@ static public class NetworkClientProcessing
     static int userType = 0;
      static int loginScreenID = 2;
      static int gameRoomBrowserScreenID = 3;
+    private const int gameWaitingRoomScreenID = 4;
+    private const int gamegRoomScreenID = 5;
     [SerializeField]
     static GameObject UI;
 
@@ -19,11 +21,20 @@ static public class NetworkClientProcessing
 
         string[] csv = msg.Split(',');
 
+        CheckPermission(csv);
+
+    }
+
+    private static void CheckPermission(string[] csv)
+    {
         if (csv[userType] == ((int)UserType.LoggedInUser).ToString() && ((int)stateChanger.GetIntCurrentScreen()) == loginScreenID)
         {
             stateChanger.SetCurrentScreenFromInt(gameRoomBrowserScreenID);
         }
-
+        else if(csv[userType] == ((int)UserType.WaitingUser).ToString() && ((int)stateChanger.GetIntCurrentScreen()) == gameWaitingRoomScreenID)
+        {
+            stateChanger.SetCurrentScreenFromInt(gamegRoomScreenID);
+        }
     }
 
     static public void SendMessageToServer(string msg, TransportPipeline pipeline)
