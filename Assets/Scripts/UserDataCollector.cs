@@ -56,4 +56,8 @@ public class UserDataCollector : MonoBehaviour
     {
         clientNW.SendMessageToServer(ProcessUserType() + username + ProcessGameRoomName(), TransportPipeline.ReliableAndInOrder);
     }
+    public void SendBackToBrownsertRequest()
+    {
+        clientNW.SendMessageToServer(ProcessUserType() , TransportPipeline.ReliableAndInOrder);
+    }
 }
