@@ -17,6 +17,10 @@ public class GameLogic : MonoBehaviour
         {
             Application.Quit();
         }
+        else if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            NetworkClientProcessing.ChangeScreen(5);
+        }
     }
 
 }

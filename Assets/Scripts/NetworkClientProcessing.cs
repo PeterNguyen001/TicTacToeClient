@@ -69,6 +69,12 @@ static public class NetworkClientProcessing
         networkClient.Disconnect();
     }
 
+    static public void ChangeScreen(int screenID)
+    {
+        stateChanger.SetCurrentScreenFromInt(screenID);
+    }
+
+
     #endregion
 
     #region Setup
