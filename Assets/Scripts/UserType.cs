@@ -8,5 +8,6 @@ public enum UserType
     OldUser = 3,
     LoggedInUser = 4,
     WaitingUser = 5,
-    GamerUser = 6
+    InGameRoom = 6,
+    Playing = 7
 }

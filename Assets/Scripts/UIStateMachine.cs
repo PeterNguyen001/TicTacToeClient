@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Device;
 
@@ -22,11 +23,14 @@ public class UIStateMachine : MonoBehaviour
     private GameObject gameRoomBrowserObj;
     private GameObject gameWaitingRoomGameObj;
     private GameObject gameRoomGameObj;
-
     private ScreenID currentScreen;
+
+    private GameObject roomNameObj;
     // Start is called before the first frame update
     void Start()
     {
+        roomNameObj = GameObject.Find("Room Name");
+        roomNameObj.SetActive(false);
         NetworkClientProcessing.SetStateChanger(this);
         welcomeObj = transform.GetChild(welcomeScreenID).gameObject;
         registerGameObj = transform.GetChild(registerScreenID).gameObject;
@@ -70,7 +74,15 @@ public class UIStateMachine : MonoBehaviour
             screenObj.SetActive(false);
         }
         screenObjs[((int)screenID)].SetActive(true);
+        if(screenID == ScreenID.GameWaitingRoomScreen || screenID == ScreenID.GameRoomScreen)
+        {
+            roomNameObj.SetActive(true);
+        }
+        else
+        { roomNameObj.SetActive(false); }
     }
+    public void SetRoomName(string name)
+    { roomNameObj.GetComponentInChildren<TextMeshProUGUI>().text = name; }
 }
 public enum ScreenID
 {

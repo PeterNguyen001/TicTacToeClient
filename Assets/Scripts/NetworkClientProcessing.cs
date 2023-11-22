@@ -5,11 +5,16 @@ using UnityEngine;
 
 static public class NetworkClientProcessing
 {
-    static int userType = 0;
-     static int loginScreenID = 2;
-     static int gameRoomBrowserScreenID = 3;
-    private const int gameWaitingRoomScreenID = 4;
-    private const int gamegRoomScreenID = 5;
+    const string changeUI = "1";
+
+    const int commandSign = 0;
+    const int toChangeUI = 1;
+    const int roomNameSign = 2;
+
+    const int loginScreenID = 2;
+    const int gameRoomBrowserScreenID = 3;
+    const int gameWaitingRoomScreenID = 4;
+    const int gamegRoomScreenID = 5;
     [SerializeField]
     static GameObject UI;
 
@@ -21,20 +26,17 @@ static public class NetworkClientProcessing
 
         string[] csv = msg.Split(',');
 
-        CheckPermission(csv);
+        ProcessMesagge(csv);
 
     }
 
-    private static void CheckPermission(string[] csv)
+    private static void ProcessMesagge(string[] csv)
     {
-        if (csv[userType] == ((int)UserType.LoggedInUser).ToString() && ((int)stateChanger.GetIntCurrentScreen()) == loginScreenID)
+        if (csv[commandSign] == changeUI)
         {
-            stateChanger.SetCurrentScreenFromInt(gameRoomBrowserScreenID);
+            stateChanger.SetCurrentScreenFromInt(int.Parse(csv[toChangeUI]));
         }
-        else if(csv[userType] == ((int)UserType.GamerUser).ToString() && ((int)stateChanger.GetIntCurrentScreen()) == gameWaitingRoomScreenID)
-        {
-            stateChanger.SetCurrentScreenFromInt(gamegRoomScreenID);
-        }
+
     }
 
     static public void SendMessageToServer(string msg, TransportPipeline pipeline)
@@ -98,6 +100,8 @@ static public class NetworkClientProcessing
         stateChanger = StateChanger;
     }
 
+    static public void ChangeGameRoomName(string name)
+    { stateChanger.SetRoomName(name); }
     static public bool IsValidMessage(string message)
     {
         char[] invalidChars = System.IO.Path.GetInvalidPathChars();
