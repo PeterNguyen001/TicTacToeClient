@@ -29,6 +29,6 @@ public class TicTacToeGrid : MonoBehaviour
 
 public enum GridType
 {
-    Player = 0,
-    Opponent = 1
+    Player1 = 0,
+    Player2 = 1
 }

@@ -5,10 +5,13 @@ using UnityEngine;
 
 static public class NetworkClientProcessing
 {
-    const string changeUI = "1";
+    public const string changeUI = "1";
+    public const string startGame = "7";
+    public const string playing = "8";
 
     const int commandSign = 0;
-    const int toChangeUI = 1;
+    const int toChangeUISign = 1;
+    const int symbolSign = 1;
     const int roomNameSign = 2;
 
     const int loginScreenID = 2;
@@ -34,9 +37,12 @@ static public class NetworkClientProcessing
     {
         if (csv[commandSign] == changeUI)
         {
-            stateChanger.SetCurrentScreenFromInt(int.Parse(csv[toChangeUI]));
+            stateChanger.SetCurrentScreenFromInt(int.Parse(csv[toChangeUISign]));
         }
-
+        else if (csv[commandSign] == startGame)
+        {
+            TicTacToeGame.SetSymbols(csv[symbolSign]);
+        }
     }
 
     static public void SendMessageToServer(string msg, TransportPipeline pipeline)
@@ -83,6 +89,7 @@ static public class NetworkClientProcessing
     static NetworkClient networkClient;
     static GameLogic gameLogic;
     static UIStateMachine stateChanger;
+    static TicTacToeGame TicTacToeGame;
     static public void SetNetworkedClient(NetworkClient NetworkClient)
     {
         networkClient = NetworkClient;
@@ -99,7 +106,10 @@ static public class NetworkClientProcessing
     {
         stateChanger = StateChanger;
     }
-
+    static public void SetTicTacToeGame(TicTacToeGame Game)
+    {
+        TicTacToeGame = Game;
+    }
     static public void ChangeGameRoomName(string name)
     { stateChanger.SetRoomName(name); }
     static public bool IsValidMessage(string message)

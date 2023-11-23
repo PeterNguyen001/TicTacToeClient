@@ -8,10 +8,13 @@ public class TicTacToeGame : MonoBehaviour
 {
 
     public Button[] buttons; 
-    private bool playerTurn = true; 
+    private bool playerTurn = false; 
+    private string yourSymbol;
+    private string opponentSymbol;
 
     void Start()
     {
+        NetworkClientProcessing.SetTicTacToeGame(this);
         InitializeButtons();
         InitializeGame();
     }
@@ -41,7 +44,7 @@ public class TicTacToeGame : MonoBehaviour
     {
         if (playerTurn && button.GetComponentInChildren<TextMeshProUGUI>().text == "")
         {
-            ProcessMove(button, "X");
+            ProcessMove(button, yourSymbol);
             playerTurn = false;
             OpponentMove(); //for ai only
             
@@ -75,12 +78,12 @@ public class TicTacToeGame : MonoBehaviour
         if (text == "X")
         {           
             button.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-            button.GetComponent<TicTacToeGrid>().SetGridType(GridType.Player) ;
+            button.GetComponent<TicTacToeGrid>().SetGridType(GridType.Player1) ;
         }
         else if(text == "O")
         {       
             button.GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
-            button.GetComponent<TicTacToeGrid>().SetGridType(GridType.Opponent);
+            button.GetComponent<TicTacToeGrid>().SetGridType(GridType.Player2);
         }
         button.interactable = false;
 
@@ -136,4 +139,20 @@ public class TicTacToeGame : MonoBehaviour
     {
         playerTurn = true;
     }
+
+    public void SetSymbols(string symbol)
+    {
+        this.yourSymbol = symbol;
+        if(symbol == "X")
+        { 
+            opponentSymbol = "O";
+            playerTurn = true;
+        }
+        else if (symbol == "O")
+        {
+            opponentSymbol = "X";
+            playerTurn = false;
+        }
+    }
+
 }
