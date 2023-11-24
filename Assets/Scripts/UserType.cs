@@ -9,5 +9,6 @@ public enum UserType
     LoggedInUser = 4,
     WaitingUser = 5,
     InGameRoom = 6,
-    Playing = 7
+    StartGame = 7,
+    Playing = 8
 }

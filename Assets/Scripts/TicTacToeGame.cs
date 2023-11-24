@@ -9,7 +9,7 @@ public class TicTacToeGame : MonoBehaviour
 
     public Button[] buttons; 
     private bool playerTurn = false; 
-    private string yourSymbol;
+    public string yourSymbol { get; private set; }
     private string opponentSymbol;
 
     void Start()
@@ -33,10 +33,14 @@ public class TicTacToeGame : MonoBehaviour
         TicTacToeGrid[] gridObjects = FindObjectsOfType<TicTacToeGrid>();
         buttons = new Button[gridObjects.Length];
 
-        for (int i = 0; i < gridObjects.Length; i++)
+        //for (int i = 0; i < gridObjects.Length; i++)
+        //{
+        //    gridObjects[i].SetPosition(i);
+        //    buttons[i] = gridObjects[i].GetComponent<Button>();
+        //}
+        foreach (TicTacToeGrid grid in gridObjects) 
         {
-            gridObjects[i].SetPosition(i);
-            buttons[i] = gridObjects[i].GetComponent<Button>();
+            buttons[grid.GetPosition()] =grid.GetComponent<Button>();
         }
     }
 
@@ -45,8 +49,11 @@ public class TicTacToeGame : MonoBehaviour
         if (playerTurn && button.GetComponentInChildren<TextMeshProUGUI>().text == "")
         {
             ProcessMove(button, yourSymbol);
+            string msg = (int)UserType.Playing + "," + button.GetComponent<TicTacToeGrid>().GetPosition().ToString() + "," + yourSymbol;
+            Debug.Log(msg);
+            NetworkClientProcessing.SendMessageToServer(msg, TransportPipeline.ReliableAndInOrder);
             playerTurn = false;
-            OpponentMove(); //for ai only
+            //OpponentMove(); //for ai only
             
         }
     }
@@ -87,10 +94,18 @@ public class TicTacToeGame : MonoBehaviour
         }
         button.interactable = false;
 
-        string msg = (int)UserType.Playing + "," + button.GetComponent<TicTacToeGrid>().position.ToString();
-        Debug.Log(msg);
-        //NetworkClientProcessing.SendMessageToServer(msg, TransportPipeline.ReliableAndInOrder);
+        
+       
         CheckForWin();
+    }
+
+    public void FindButton(int index, string symbol)
+    {
+        Debug.Log("finding");
+        ProcessMove(buttons[index], symbol);
+        if(symbol != yourSymbol ) 
+        { playerTurn = true; }
+        
     }
 
     void CheckForWin()

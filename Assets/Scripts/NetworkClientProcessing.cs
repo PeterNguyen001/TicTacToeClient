@@ -14,6 +14,9 @@ static public class NetworkClientProcessing
     const int symbolSign = 1;
     const int roomNameSign = 2;
 
+    const int newGridPositionSign = 1;
+    const int newGridSymbolSign = 2;
+
     const int loginScreenID = 2;
     const int gameRoomBrowserScreenID = 3;
     const int gameWaitingRoomScreenID = 4;
@@ -41,7 +44,11 @@ static public class NetworkClientProcessing
         }
         else if (csv[commandSign] == startGame)
         {
-            TicTacToeGame.SetSymbols(csv[symbolSign]);
+            ticTacToeGame.SetSymbols(csv[symbolSign]);
+        }
+        else if (csv[commandSign] == playing)
+        {
+            ticTacToeGame.FindButton(int.Parse(csv[newGridPositionSign]), csv[newGridSymbolSign]);
         }
     }
 
@@ -89,7 +96,7 @@ static public class NetworkClientProcessing
     static NetworkClient networkClient;
     static GameLogic gameLogic;
     static UIStateMachine stateChanger;
-    static TicTacToeGame TicTacToeGame;
+    static TicTacToeGame ticTacToeGame;
     static public void SetNetworkedClient(NetworkClient NetworkClient)
     {
         networkClient = NetworkClient;
@@ -108,7 +115,7 @@ static public class NetworkClientProcessing
     }
     static public void SetTicTacToeGame(TicTacToeGame Game)
     {
-        TicTacToeGame = Game;
+        ticTacToeGame = Game;
     }
     static public void ChangeGameRoomName(string name)
     { stateChanger.SetRoomName(name); }

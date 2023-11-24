@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class TicTacToeGrid : MonoBehaviour
 {
     private TicTacToeGame ticTacToeLogic;
-    public int position {  get; private set; }
-    public GridType gridType { get; private set; }
+    [SerializeField]
+    int position;
+    public GridType gridType { get; set; }
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,8 @@ public class TicTacToeGrid : MonoBehaviour
     }
     public void SetPosition(int pos)
     { this.position = pos;}
+    public int GetPosition()
+    { return this.position; }
 }
 
 public enum GridType
