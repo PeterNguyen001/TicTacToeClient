@@ -13,27 +13,15 @@ public class UserDataCollector : MonoBehaviour
     private const string goBack = "b";
     private string username;
     
-    private GameObject clientObj;
-        private NetworkClient clientNW;
-        public UserType userType;
+     [SerializeField]
+    private UserType userType;
 
         // Start is called before the first frame update
-    void Start()
-    {
-        clientObj = GameObject.Find("Client");
-        clientNW = GameObject.Find("Client").GetComponent<NetworkClient>();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    public void SendUserDataToServer()
+    public void SendUsernameAndPasswordToServer()
     {
-        //clean up
-        clientNW.SendMessageToServer( ProcessUserType() + ProcessUsername() + ProcessPassword(),TransportPipeline.ReliableAndInOrder);
+        NetworkClientProcessing.SendMessageToServer( ProcessUserType() + ProcessUsername() + ProcessPassword(),TransportPipeline.ReliableAndInOrder);
     }
 
     public string ProcessUserType()
@@ -56,10 +44,10 @@ public class UserDataCollector : MonoBehaviour
     }
     public void SendGameRoomName()
     {
-        clientNW.SendMessageToServer(ProcessUserType() + username + ProcessGameRoomName(), TransportPipeline.ReliableAndInOrder);
+        NetworkClientProcessing.SendMessageToServer(ProcessUserType() + username + ProcessGameRoomName(), TransportPipeline.ReliableAndInOrder);
     }
     public void SendBackToBrownsertRequest()
     {
-        clientNW.SendMessageToServer(ProcessUserType() + goBack, TransportPipeline.ReliableAndInOrder);
+        NetworkClientProcessing.SendMessageToServer(ClientToServerSignifiers.goBack, TransportPipeline.ReliableAndInOrder);
     }
 }

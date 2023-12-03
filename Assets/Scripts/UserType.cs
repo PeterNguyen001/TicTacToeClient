@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum UserType 
 {
-    NewUser = 2,
-    OldUser = 3,
-    LoggedInUser = 4,
+    RegisterUser = 2,
+    LogInUser = 3,
+    FindGameRoom = 4,
     WaitingUser = 5,
     InGameRoom = 6,
     StartGame = 7,

@@ -23,7 +23,7 @@ public class UIStateMachine : MonoBehaviour
     private GameObject gameRoomBrowserObj;
     private GameObject gameWaitingRoomGameObj;
     private GameObject gameRoomGameObj;
-    private ScreenID currentScreen;
+    private int currentScreen;
 
     private GameObject roomNameObj;
     // Start is called before the first frame update
@@ -46,28 +46,21 @@ public class UIStateMachine : MonoBehaviour
     }
 
 
-    public void SetCurrentScreen(ScreenID screenID)
+
+
+    public void SetCurrentScreen(int screenID)
     {
-        currentScreen = screenID;
         ActivateSpecificScreen(screenID);
     }
 
-    public void SetCurrentScreenFromInt(int screenID)
-    {
-        SetCurrentScreen((ScreenID)screenID);
-    }
 
-    public ScreenID GetCurrentScreen()
+
+    public int GetIntCurrentScreen()
     {
         return currentScreen;
     }
 
-    public int GetIntCurrentScreen()
-    {
-        return ((int)currentScreen);
-    }
-
-    public void ActivateSpecificScreen(ScreenID screenID)
+    public void ActivateSpecificScreen(int screenID)
     {
         foreach(GameObject screenObj in screenObjs)
         {               
@@ -84,13 +77,13 @@ public class UIStateMachine : MonoBehaviour
     public void SetRoomName(string name)
     { roomNameObj.GetComponentInChildren<TextMeshProUGUI>().text = name; }
 }
-public enum ScreenID
+public class ScreenID
 {
-    WelcomeScreen = 0,
-    RegisterScreen = 1,
-    LoginScreen = 2,
-    GameRoomBrowserScreen = 3,
-    GameWaitingRoomScreen = 4,
-    GameRoomScreen = 5
+    public const int WelcomeScreen = 0;
+    public const int RegisterScreen = 1;
+    public const int LoginScreen = 2;
+    public const int GameRoomBrowserScreen = 3;
+    public const int GameWaitingRoomScreen = 4;
+    public const int GameRoomScreen = 5;
 }
 

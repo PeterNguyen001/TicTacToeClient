@@ -5,22 +5,7 @@ using UnityEngine;
 
 static public class NetworkClientProcessing
 {
-    public const string changeUI = "1";
-    public const string startGame = "7";
-    public const string playing = "8";
 
-    const int commandSign = 0;
-    const int toChangeUISign = 1;
-    const int symbolSign = 1;
-    const int roomNameSign = 2;
-
-    const int newGridPositionSign = 1;
-    const int newGridSymbolSign = 2;
-
-    const int loginScreenID = 2;
-    const int gameRoomBrowserScreenID = 3;
-    const int gameWaitingRoomScreenID = 4;
-    const int gamegRoomScreenID = 5;
     [SerializeField]
     static GameObject UI;
 
@@ -38,16 +23,21 @@ static public class NetworkClientProcessing
 
     private static void ProcessMesagge(string[] csv)
     {
-        if (csv[commandSign] == changeUI)
+        const int commandSign = 0;
+        if (csv[commandSign] == ServerToClientSignifiers.changeUI)
         {
-            stateChanger.SetCurrentScreenFromInt(int.Parse(csv[toChangeUISign]));
+            const int toChangeUISign = 1;
+            stateChanger.SetCurrentScreen(int.Parse(csv[toChangeUISign]));
         }
-        else if (csv[commandSign] == startGame)
+        else if (csv[commandSign] == ServerToClientSignifiers.startGame)
         {
+            const int symbolSign = 1;
             ticTacToeGame.SetSymbols(csv[symbolSign]);
         }
-        else if (csv[commandSign] == playing)
+        else if (csv[commandSign] == ServerToClientSignifiers.playing)
         {
+            const int newGridPositionSign = 1;
+            const int newGridSymbolSign = 2;
             ticTacToeGame.FindButton(int.Parse(csv[newGridPositionSign]), csv[newGridSymbolSign]);
         }
     }
@@ -86,7 +76,7 @@ static public class NetworkClientProcessing
 
     static public void ChangeScreen(int screenID)
     {
-        stateChanger.SetCurrentScreenFromInt(screenID);
+        stateChanger.SetCurrentScreen(screenID);
     }
 
 
@@ -143,12 +133,15 @@ static public class NetworkClientProcessing
 #region Protocol Signifiers
 static public class ClientToServerSignifiers
 {
-    public const int asd = 1;
+    public const string playing = "8";
+    public const string goBack = "b";
 }
 
 static public class ServerToClientSignifiers
 {
-    public const int asd = 1;
+    public const string changeUI = "1";
+    public const string startGame = "7";
+    public const string playing = "8";
 }
 
 #endregion
