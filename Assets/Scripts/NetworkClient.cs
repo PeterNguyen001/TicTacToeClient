@@ -37,6 +37,7 @@ public class NetworkClient : MonoBehaviour
 
     public void OnDestroy()
     {
+        SendMessageToServer("0", TransportPipeline.FireAndForget);
         networkConnection.Disconnect(networkDriver);
         networkConnection = default(NetworkConnection);
         networkDriver.Dispose();

@@ -6,48 +6,45 @@ using UnityEngine;
 
 public class UserDataCollector : MonoBehaviour
 {
-    private const int Username = 0;
-    private const int Password = 1;
-    private const int GameRoom = 0;
+    private GameObject  Username;
+    private GameObject Password;
+    private GameObject GameRoomName;
 
-    private const string goBack = "b";
-    private string username;
+
+    // Start is called before the first frame update
+    private void Start()
+    {
+        Username = GameObject.Find("Username Input Field");
+        Password = GameObject.Find ("Password Input Field");
+        GameRoomName = GameObject.Find("Room Name");
+    }
+
     
-     [SerializeField]
-    private UserType userType;
-
-        // Start is called before the first frame update
-
-
-    public void SendUsernameAndPasswordToServer()
-    {
-        NetworkClientProcessing.SendMessageToServer( ProcessUserType() + ProcessUsername() + ProcessPassword(),TransportPipeline.ReliableAndInOrder);
-    }
-
-    public string ProcessUserType()
-    {
-        return ((int)userType).ToString() + ",";
-    }
-    public string ProcessUsername()
-    {
-        username = transform.GetChild(Username).gameObject.GetComponent<TMP_InputField>().text + ",";
-        return username ;
-    }
-    public string ProcessPassword()
-    {
-        return transform.GetChild(Password).gameObject.GetComponent<TMP_InputField>().text + ",";
-    }
     public string ProcessGameRoomName()
     {
-        NetworkClientProcessing.ChangeGameRoomName(transform.GetChild(GameRoom).gameObject.GetComponent<TMP_InputField>().text);
-        return transform.GetChild(GameRoom).gameObject.GetComponent<TMP_InputField>().text + ",";
+        NetworkClientProcessing.ChangeGameRoomName(GameRoomName.GetComponent<TMP_InputField>().text);
+        return GameRoomName.GetComponent<TMP_InputField>().text + ",";
     }
     public void SendGameRoomName()
     {
-        NetworkClientProcessing.SendMessageToServer(ProcessUserType() + username + ProcessGameRoomName(), TransportPipeline.ReliableAndInOrder);
+        NetworkClientProcessing.SendMessageToServer(ClientToServerSignifiers.FindGameRoom + ProcessGameRoomName(), TransportPipeline.ReliableAndInOrder);
     }
     public void SendBackToBrownsertRequest()
     {
-        NetworkClientProcessing.SendMessageToServer(ClientToServerSignifiers.goBack, TransportPipeline.ReliableAndInOrder);
+        NetworkClientProcessing.SendMessageToServer(ClientToServerSignifiers.GoBack, TransportPipeline.ReliableAndInOrder);
+    }
+
+    public string GetUsernameAndPassword()
+    { 
+       return  $"{Username.GetComponent<TMP_InputField>().text},{Password.GetComponent<TMP_InputField>().text}";
+    }
+    public void RegisterUser()
+    {
+        NetworkClientProcessing.SendMessageToServer($"{ClientToServerSignifiers.RegisterUser},{GetUsernameAndPassword()}", TransportPipeline.ReliableAndInOrder);
+    }
+
+    public void LoginUser()
+    {
+        NetworkClientProcessing.SendMessageToServer($"{ClientToServerSignifiers.LogInUser},{GetUsernameAndPassword()}", TransportPipeline.ReliableAndInOrder);
     }
 }

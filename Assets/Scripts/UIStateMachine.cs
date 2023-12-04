@@ -10,16 +10,8 @@ public class UIStateMachine : MonoBehaviour
 
     private List<GameObject> screenObjs = new List<GameObject>();
 
-    private const int welcomeScreenID = 0; 
-    private const int registerScreenID = 1;
-    private const int loginScreenID = 2;
-    private const int gameRoomBrowserScreenID = 3;
-    private const int gameWaitingRoomScreenID = 4;
-    private const int gamegRoomScreenID = 5;
 
     private GameObject welcomeObj;
-    private GameObject registerGameObj;
-    private GameObject loginGameObj;
     private GameObject gameRoomBrowserObj;
     private GameObject gameWaitingRoomGameObj;
     private GameObject gameRoomGameObj;
@@ -32,17 +24,15 @@ public class UIStateMachine : MonoBehaviour
         roomNameObj = GameObject.Find("Room Name");
         roomNameObj.SetActive(false);
         NetworkClientProcessing.SetStateChanger(this);
-        welcomeObj = transform.GetChild(welcomeScreenID).gameObject;
-        registerGameObj = transform.GetChild(registerScreenID).gameObject;
-        loginGameObj = transform.GetChild(loginScreenID).gameObject;
-        gameRoomBrowserObj = transform.GetChild(gameRoomBrowserScreenID).gameObject;
-        gameWaitingRoomGameObj = transform.GetChild(gameWaitingRoomScreenID).gameObject;
-        gameRoomGameObj = transform.GetChild(gamegRoomScreenID).gameObject;
+        welcomeObj = transform.GetChild(ScreenID.WelcomeScreen).gameObject;
+        gameRoomBrowserObj = transform.GetChild(ScreenID.GameRoomBrowserScreen).gameObject;
+        gameWaitingRoomGameObj = transform.GetChild(ScreenID.GameWaitingRoomScreen).gameObject;
+        gameRoomGameObj = transform.GetChild(ScreenID.GameRoomScreen).gameObject;
         foreach (Transform child in transform)
         {
             screenObjs.Add(child.gameObject);
         }
-        ActivateSpecificScreen(welcomeScreenID);
+        ActivateSpecificScreen(ScreenID.WelcomeScreen);
     }
 
 
@@ -80,10 +70,8 @@ public class UIStateMachine : MonoBehaviour
 public class ScreenID
 {
     public const int WelcomeScreen = 0;
-    public const int RegisterScreen = 1;
-    public const int LoginScreen = 2;
-    public const int GameRoomBrowserScreen = 3;
-    public const int GameWaitingRoomScreen = 4;
-    public const int GameRoomScreen = 5;
+    public const int GameRoomBrowserScreen = 1;
+    public const int GameWaitingRoomScreen = 2;
+    public const int GameRoomScreen = 3;
 }
 

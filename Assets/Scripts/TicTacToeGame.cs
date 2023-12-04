@@ -40,7 +40,7 @@ public class TicTacToeGame : MonoBehaviour
         if (playerTurn && button.GetComponentInChildren<TextMeshProUGUI>().text == "")
         {
             ProcessMove(button, yourSymbol);
-            string msg = ClientToServerSignifiers.playing + "," + button.GetComponent<TicTacToeGrid>().GetPosition().ToString() + "," + yourSymbol;
+            string msg = ClientToServerSignifiers.Playing + "," + button.GetComponent<TicTacToeGrid>().GetPosition().ToString() + "," + yourSymbol;
             NetworkClientProcessing.SendMessageToServer(msg, TransportPipeline.ReliableAndInOrder);
             playerTurn = false;
         }

@@ -87,6 +87,7 @@ static public class NetworkClientProcessing
     static GameLogic gameLogic;
     static UIStateMachine stateChanger;
     static TicTacToeGame ticTacToeGame;
+    static UserDataCollector userDataCollector;
     static public void SetNetworkedClient(NetworkClient NetworkClient)
     {
         networkClient = NetworkClient;
@@ -133,8 +134,11 @@ static public class NetworkClientProcessing
 #region Protocol Signifiers
 static public class ClientToServerSignifiers
 {
-    public const string playing = "8";
-    public const string goBack = "b";
+    public const string RegisterUser = "2";
+    public const string LogInUser = "3";
+    public const string FindGameRoom = "4";
+    public const string Playing = "8";
+    public const string GoBack = "b";
 }
 
 static public class ServerToClientSignifiers
