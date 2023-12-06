@@ -629,7 +629,7 @@ GameObject:
   - component: {fileID: 5208503799569979834}
   - component: {fileID: 276303807168780169}
   m_Layer: 5
-  m_Name: GameRoom
+  m_Name: Room Name Input Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -27,7 +27,8 @@ static public class NetworkClientProcessing
         if (csv[commandSign] == ServerToClientSignifiers.changeUI)
         {
             const int toChangeUISign = 1;
-            stateChanger.SetCurrentScreen(int.Parse(csv[toChangeUISign]));
+            ScreenID screenID = (ScreenID)int.Parse(csv[toChangeUISign]);
+            stateChanger.ActivateScreen(screenID);
         }
         else if (csv[commandSign] == ServerToClientSignifiers.startGame)
         {
@@ -74,10 +75,6 @@ static public class NetworkClientProcessing
         networkClient.Disconnect();
     }
 
-    static public void ChangeScreen(int screenID)
-    {
-        stateChanger.SetCurrentScreen(screenID);
-    }
 
 
     #endregion
@@ -138,7 +135,7 @@ static public class ClientToServerSignifiers
     public const string LogInUser = "3";
     public const string FindGameRoom = "4";
     public const string Playing = "8";
-    public const string GoBack = "b";
+    public const string GoBack = "10";
 }
 
 static public class ServerToClientSignifiers

@@ -3,41 +3,37 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-
 public class UserDataCollector : MonoBehaviour
 {
-    private GameObject  Username;
-    private GameObject Password;
-    private GameObject GameRoomName;
+    private TMP_InputField usernameInputField;
+    private TMP_InputField passwordInputField;
+    private TMP_InputField gameRoomNameInputField;
 
-
-    // Start is called before the first frame update
-    private void Start()
+    private string GetGameRoomName()
     {
-        Username = GameObject.Find("Username Input Field");
-        Password = GameObject.Find ("Password Input Field");
-        GameRoomName = GameObject.Find("Room Name");
+        return gameRoomNameInputField.text;
     }
 
-    
-    public string ProcessGameRoomName()
-    {
-        NetworkClientProcessing.ChangeGameRoomName(GameRoomName.GetComponent<TMP_InputField>().text);
-        return GameRoomName.GetComponent<TMP_InputField>().text + ",";
-    }
     public void SendGameRoomName()
     {
-        NetworkClientProcessing.SendMessageToServer(ClientToServerSignifiers.FindGameRoom + ProcessGameRoomName(), TransportPipeline.ReliableAndInOrder);
+        gameRoomNameInputField = GameObject.Find("Room Name Input Field").GetComponent<TMP_InputField>();
+        string gameRoomName = GetGameRoomName();
+        NetworkClientProcessing.ChangeGameRoomName(gameRoomName);
+        NetworkClientProcessing.SendMessageToServer($"{ClientToServerSignifiers.FindGameRoom},{gameRoomName}", TransportPipeline.ReliableAndInOrder);
     }
-    public void SendBackToBrownsertRequest()
+
+    public void SendBackToBrowserRequest()
     {
         NetworkClientProcessing.SendMessageToServer(ClientToServerSignifiers.GoBack, TransportPipeline.ReliableAndInOrder);
     }
 
-    public string GetUsernameAndPassword()
-    { 
-       return  $"{Username.GetComponent<TMP_InputField>().text},{Password.GetComponent<TMP_InputField>().text}";
+    private string GetUsernameAndPassword()
+    {
+        usernameInputField = GameObject.Find("Username Input Field").GetComponent<TMP_InputField>();
+        passwordInputField = GameObject.Find("Password Input Field").GetComponent<TMP_InputField>();
+        return $"{usernameInputField.text},{passwordInputField.text}";
     }
+
     public void RegisterUser()
     {
         NetworkClientProcessing.SendMessageToServer($"{ClientToServerSignifiers.RegisterUser},{GetUsernameAndPassword()}", TransportPipeline.ReliableAndInOrder);

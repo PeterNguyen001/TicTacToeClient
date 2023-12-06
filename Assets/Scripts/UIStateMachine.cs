@@ -1,77 +1,56 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Device;
 
 public class UIStateMachine : MonoBehaviour
 {
-
-    private List<GameObject> screenObjs = new List<GameObject>();
-
-
-    private GameObject welcomeObj;
-    private GameObject gameRoomBrowserObj;
-    private GameObject gameWaitingRoomGameObj;
-    private GameObject gameRoomGameObj;
-    private int currentScreen;
-
+    private Dictionary<ScreenID, GameObject> screenObjects = new Dictionary<ScreenID, GameObject>();
     private GameObject roomNameObj;
-    // Start is called before the first frame update
+    private ScreenID currentScreen;
+
     void Start()
     {
+        InitializeScreenObjects();
         roomNameObj = GameObject.Find("Room Name");
-        roomNameObj.SetActive(false);
         NetworkClientProcessing.SetStateChanger(this);
-        welcomeObj = transform.GetChild(ScreenID.WelcomeScreen).gameObject;
-        gameRoomBrowserObj = transform.GetChild(ScreenID.GameRoomBrowserScreen).gameObject;
-        gameWaitingRoomGameObj = transform.GetChild(ScreenID.GameWaitingRoomScreen).gameObject;
-        gameRoomGameObj = transform.GetChild(ScreenID.GameRoomScreen).gameObject;
-        foreach (Transform child in transform)
-        {
-            screenObjs.Add(child.gameObject);
-        }
-        ActivateSpecificScreen(ScreenID.WelcomeScreen);
+        ActivateScreen(ScreenID.WelcomeScreen);
     }
 
-
-
-
-    public void SetCurrentScreen(int screenID)
+    private void InitializeScreenObjects()
     {
-        ActivateSpecificScreen(screenID);
+        screenObjects[ScreenID.WelcomeScreen] = transform.GetChild((int)ScreenID.WelcomeScreen).gameObject;
+        screenObjects[ScreenID.GameRoomBrowserScreen] = transform.GetChild((int)ScreenID.GameRoomBrowserScreen).gameObject;
+        screenObjects[ScreenID.GameWaitingRoomScreen] = transform.GetChild((int)ScreenID.GameWaitingRoomScreen).gameObject;
+        screenObjects[ScreenID.GameRoomScreen] = transform.GetChild((int)ScreenID.GameRoomScreen).gameObject;
     }
 
+    public void ActivateScreen(ScreenID screenID)
+    {
+        foreach (var screenObj in screenObjects.Values)
+        {
+            screenObj.SetActive(false);
+        }
+        screenObjects[screenID].SetActive(true);
+        roomNameObj.SetActive(screenID == ScreenID.GameWaitingRoomScreen || screenID == ScreenID.GameRoomScreen);
+        currentScreen = screenID;
+    }
 
+    public void SetRoomName(string name)
+    {
+        roomNameObj.SetActive(true);
+        roomNameObj.GetComponentInChildren<TextMeshProUGUI>().text = name;
+    }
 
-    public int GetIntCurrentScreen()
+    public ScreenID GetCurrentScreen()
     {
         return currentScreen;
     }
-
-    public void ActivateSpecificScreen(int screenID)
-    {
-        foreach(GameObject screenObj in screenObjs)
-        {               
-            screenObj.SetActive(false);
-        }
-        screenObjs[((int)screenID)].SetActive(true);
-        if(screenID == ScreenID.GameWaitingRoomScreen || screenID == ScreenID.GameRoomScreen)
-        {
-            roomNameObj.SetActive(true);
-        }
-        else
-        { roomNameObj.SetActive(false); }
-    }
-    public void SetRoomName(string name)
-    { roomNameObj.GetComponentInChildren<TextMeshProUGUI>().text = name; }
 }
-public class ScreenID
+
+public enum ScreenID
 {
-    public const int WelcomeScreen = 0;
-    public const int GameRoomBrowserScreen = 1;
-    public const int GameWaitingRoomScreen = 2;
-    public const int GameRoomScreen = 3;
+    WelcomeScreen = 0,
+    GameRoomBrowserScreen = 1,
+    GameWaitingRoomScreen = 2,
+    GameRoomScreen = 3
 }
-

@@ -19,7 +19,7 @@ public class GameLogic : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Tab))
         {
-            NetworkClientProcessing.ChangeScreen(5);
+            //NetworkClientProcessing.ChangeScreen(5);
         }
     }
 

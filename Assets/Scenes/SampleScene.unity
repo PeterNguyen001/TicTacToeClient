@@ -207,21 +207,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2015908354}
-        m_TargetAssemblyTypeName: UIStateMachine, Assembly-CSharp
-        m_MethodName: SetCurrentScreen
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2015908355}
         m_TargetAssemblyTypeName: UserDataCollector, Assembly-CSharp
-        m_MethodName: SendBackToBrownsertRequest
+        m_MethodName: SendBackToBrowserRequest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -277,6 +265,22 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2015908353}
     m_Modifications:
+    - target: {fileID: 2037204021990844946, guid: d63a284fd1a03864fa7cba720bea12e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2015908355}
+    - target: {fileID: 2037204021990844946, guid: d63a284fd1a03864fa7cba720bea12e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RegisterUser
+      objectReference: {fileID: 0}
+    - target: {fileID: 2037204022173102436, guid: d63a284fd1a03864fa7cba720bea12e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2015908355}
+    - target: {fileID: 2037204022173102436, guid: d63a284fd1a03864fa7cba720bea12e7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoginUser
+      objectReference: {fileID: 0}
     - target: {fileID: 2037204022903937721, guid: d63a284fd1a03864fa7cba720bea12e7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -593,7 +597,7 @@ PrefabInstance:
     - target: {fileID: 3116355931290546261, guid: 5283ce63fcf8ff94f8d45d75505df950, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2015908355}
     - target: {fileID: 3116355931290546261, guid: 5283ce63fcf8ff94f8d45d75505df950, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -1054,16 +1058,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 2015908353}
     m_Modifications:
     - target: {fileID: 1655232141, guid: 11aba8df427e84d439249f8522edbf77, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655232141, guid: 11aba8df427e84d439249f8522edbf77, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655232141, guid: 11aba8df427e84d439249f8522edbf77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2015908354}
+      objectReference: {fileID: 2015908355}
     - target: {fileID: 1655232141, guid: 11aba8df427e84d439249f8522edbf77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1655232141, guid: 11aba8df427e84d439249f8522edbf77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetCurrentScreen
+      value: SendBackToBrowserRequest
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655232141, guid: 11aba8df427e84d439249f8522edbf77, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UserDataCollector, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1655232141, guid: 11aba8df427e84d439249f8522edbf77, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1402187695653881704, guid: 11aba8df427e84d439249f8522edbf77, type: 3}
       propertyPath: m_Pivot.x
