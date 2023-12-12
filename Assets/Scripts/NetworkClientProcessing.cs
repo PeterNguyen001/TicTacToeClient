@@ -23,19 +23,22 @@ static public class NetworkClientProcessing
 
     private static void ProcessMesagge(string[] csv)
     {
-        const int commandSign = 0;
-        if (csv[commandSign] == ServerToClientSignifiers.changeUI)
+
+        int signifier;
+        int.TryParse(csv[0], out signifier);
+
+        if (signifier == ServerToClientSignifiers.changeUI)
         {
             const int toChangeUISign = 1;
             ScreenID screenID = (ScreenID)int.Parse(csv[toChangeUISign]);
             stateChanger.ActivateScreen(screenID);
         }
-        else if (csv[commandSign] == ServerToClientSignifiers.startGame)
+        else if (signifier == ServerToClientSignifiers.startGame)
         {
             const int symbolSign = 1;
             ticTacToeGame.SetSymbols(csv[symbolSign]);
         }
-        else if (csv[commandSign] == ServerToClientSignifiers.playing)
+        else if (signifier == ServerToClientSignifiers.playing)
         {
             const int newGridPositionSign = 1;
             const int newGridSymbolSign = 2;
@@ -131,18 +134,20 @@ static public class NetworkClientProcessing
 #region Protocol Signifiers
 static public class ClientToServerSignifiers
 {
-    public const string RegisterUser = "2";
-    public const string LogInUser = "3";
-    public const string FindGameRoom = "4";
-    public const string Playing = "8";
-    public const string GoBack = "10";
+    public const int RegisterUser = 2;
+    public const int LogInUser = 3;
+    public const int FindGameRoom = 4;
+    public const int updateHeartbeat = 5;
+    public const int Playing = 8;
+    public const int GoBack = 10;
 }
 
 static public class ServerToClientSignifiers
 {
-    public const string changeUI = "1";
-    public const string startGame = "7";
-    public const string playing = "8";
+    public const int changeUI = 1;
+    public const int startGame = 7;
+    public const int playing = 8;
+    public const int Spectate = 9;
 }
 
 #endregion

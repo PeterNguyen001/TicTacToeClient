@@ -8,6 +8,7 @@ public class TicTacToeGame : MonoBehaviour
     private bool playerTurn = false;
     public string yourSymbol { get; private set; }
     private string opponentSymbol;
+    private bool isSpectator = false;
 
     void Start()
     {
@@ -59,7 +60,7 @@ public class TicTacToeGame : MonoBehaviour
     public void FindButton(int index, string symbol)
     {
         ProcessMove(buttons[index], symbol);
-        if (symbol != yourSymbol) playerTurn = true;
+        if (symbol != yourSymbol && !isSpectator) playerTurn = true;
     }
 
     void CheckForWin()
@@ -99,6 +100,11 @@ public class TicTacToeGame : MonoBehaviour
 
     public void SetSymbols(string symbol)
     {
+        if(symbol == "Y")
+        {
+            isSpectator = true;
+            return;
+        }
         yourSymbol = symbol;
         opponentSymbol = symbol == "X" ? "O" : "X";
         playerTurn = symbol == "X";

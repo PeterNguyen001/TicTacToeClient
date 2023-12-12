@@ -24,7 +24,7 @@ public class UserDataCollector : MonoBehaviour
 
     public void SendBackToBrowserRequest()
     {
-        NetworkClientProcessing.SendMessageToServer(ClientToServerSignifiers.GoBack, TransportPipeline.ReliableAndInOrder);
+        NetworkClientProcessing.SendMessageToServer(ClientToServerSignifiers.GoBack.ToString(), TransportPipeline.ReliableAndInOrder);
     }
 
     private string GetUsernameAndPassword()
