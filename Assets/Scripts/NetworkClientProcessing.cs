@@ -6,9 +6,6 @@ using UnityEngine;
 static public class NetworkClientProcessing
 {
 
-    [SerializeField]
-    static GameObject UI;
-
     #region Send and Receive Data Functions
     static public void ReceivedMessageFromServer(string msg, TransportPipeline pipeline)
     {
@@ -27,22 +24,20 @@ static public class NetworkClientProcessing
         int signifier;
         int.TryParse(csv[0], out signifier);
 
-        if (signifier == ServerToClientSignifiers.changeUI)
+        switch (signifier)
         {
-            const int toChangeUISign = 1;
-            ScreenID screenID = (ScreenID)int.Parse(csv[toChangeUISign]);
-            stateChanger.ActivateScreen(screenID);
-        }
-        else if (signifier == ServerToClientSignifiers.startGame)
-        {
-            const int symbolSign = 1;
-            ticTacToeGame.SetSymbols(csv[symbolSign]);
-        }
-        else if (signifier == ServerToClientSignifiers.playing)
-        {
-            const int newGridPositionSign = 1;
-            const int newGridSymbolSign = 2;
-            ticTacToeGame.FindButton(int.Parse(csv[newGridPositionSign]), csv[newGridSymbolSign]);
+            case ServerToClientSignifiers.changeUI:
+                ScreenID screenID = (ScreenID)int.Parse(csv[1]);
+                stateChanger.ActivateScreen(screenID); break;
+
+            case ServerToClientSignifiers.startGame:
+                ticTacToeGame.SetSymbols(csv[1]); break;
+
+            case ServerToClientSignifiers.playing:
+                ticTacToeGame.FindButton(int.Parse(csv[1]), csv[2]); break;
+
+            case ServerToClientSignifiers.ChatMessage:
+                chatBox.AddMessage(csv[1]); break;
         }
     }
 
@@ -54,6 +49,10 @@ static public class NetworkClientProcessing
         { Debug.Log("Invalid Character!"); }
     }
 
+    static public void SendChatMessage(string msg)
+    {
+        SendMessageToServer($"{ClientToServerSignifiers.ChatMessage},{msg}", TransportPipeline.ReliableAndInOrder);
+    }
     #endregion
 
     #region Connection Related Functions and Events
@@ -84,10 +83,9 @@ static public class NetworkClientProcessing
 
     #region Setup
     static NetworkClient networkClient;
-    static GameLogic gameLogic;
     static UIStateMachine stateChanger;
     static TicTacToeGame ticTacToeGame;
-    static UserDataCollector userDataCollector;
+    static ChatBox chatBox;
     static public void SetNetworkedClient(NetworkClient NetworkClient)
     {
         networkClient = NetworkClient;
@@ -96,10 +94,6 @@ static public class NetworkClientProcessing
     {
         return networkClient;
     }
-    static public void SetGameLogic(GameLogic GameLogic)
-    {
-        gameLogic = GameLogic;
-    }
     static public void SetStateChanger(UIStateMachine StateChanger)
     {
         stateChanger = StateChanger;
@@ -107,6 +101,10 @@ static public class NetworkClientProcessing
     static public void SetTicTacToeGame(TicTacToeGame Game)
     {
         ticTacToeGame = Game;
+    }
+    static public void SetChatBox(ChatBox ChatBox)
+    {
+        chatBox = ChatBox;
     }
     static public void ChangeGameRoomName(string name)
     { stateChanger.SetRoomName(name); }
@@ -140,6 +138,7 @@ static public class ClientToServerSignifiers
     public const int updateHeartbeat = 5;
     public const int Playing = 8;
     public const int GoBack = 10;
+    public const int ChatMessage = 11;
 }
 
 static public class ServerToClientSignifiers
@@ -148,6 +147,7 @@ static public class ServerToClientSignifiers
     public const int startGame = 7;
     public const int playing = 8;
     public const int Spectate = 9;
+    public const int ChatMessage = 11;
 }
 
 #endregion
